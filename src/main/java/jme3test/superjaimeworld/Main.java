@@ -47,6 +47,7 @@ public class Main extends SimpleApplication {
     private BulletAppState bulletAppState;
     private SceneState sceneState;
     private GameState gameState;
+    private MovementAppState movementAppState;
     
     private CollisionState collisionState;
 
@@ -66,10 +67,13 @@ public class Main extends SimpleApplication {
         gameState = new GameState(bulletAppState);
         sceneState = new SceneState(bulletAppState);
         collisionState = new CollisionState();
+        movementAppState = new MovementAppState(cam);
         stateManager.attach(bulletAppState);
         stateManager.attach(gameState);
         stateManager.attach(sceneState);
         stateManager.attach(collisionState);
+        stateManager.attach(movementAppState);
+
         bulletAppState.getPhysicsSpace().addCollisionListener(collisionState);
     }
 

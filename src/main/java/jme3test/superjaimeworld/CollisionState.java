@@ -21,9 +21,6 @@ import java.util.List;
 public class CollisionState extends BaseAppState implements PhysicsCollisionListener {
 
     private Spatial player;
-    private String playerName;
-    private final List<Spatial> enemies = new ArrayList<>();
-    private final List<String> enemyNames = new ArrayList<>();
     private final List<Spatial> pickups = new ArrayList<>();
     
     
@@ -45,14 +42,8 @@ public class CollisionState extends BaseAppState implements PhysicsCollisionList
     
     public void setPlayer(Spatial player) {
         this.player = player;
-        this.playerName = player.getName();
     }
     
-    public void addEnemy(Spatial enemy) {
-        this.enemies.add(enemy);
-        this.enemyNames.add(enemy.getName());
-    }
-
     @Override
     public void collision(PhysicsCollisionEvent event) {
         final Spatial nodeA = event.getNodeA();
@@ -60,7 +51,7 @@ public class CollisionState extends BaseAppState implements PhysicsCollisionList
         if (nodeA == null || nodeB == null) {
             return;
         }
-        final Spatial playerNode = nodeA.getControl(MovementControl.class) != null ? nodeA : nodeB.getControl(MovementControl.class) != null ? nodeB : null;
+        final Spatial playerNode = nodeA == player ? nodeA : nodeB == player ? nodeB : null;
         if (playerNode == null) {
             return;
         }

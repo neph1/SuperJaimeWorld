@@ -152,6 +152,5 @@ public class SceneState extends BaseAppState {
         enemyNode.addControl(enemy);
         enemyNode.addControl(new EnemyControl());
         scene.attachChild(enemyNode);
-        getStateManager().getState(CollisionState.class).addEnemy(enemyNode);
     }
 }

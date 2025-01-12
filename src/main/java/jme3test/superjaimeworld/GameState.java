@@ -62,7 +62,6 @@ public class GameState extends BaseAppState {
 
     private BetterCharacterControl physicsCharacter;
     private Node playerNode;
-    private MovementControl moveControl;
 
     private final Vector3f startTranslation = new Vector3f(0f, 2f, 0f);
     private final Vector3f gravity = new Vector3f(0f, -10f, 0f);
@@ -135,9 +134,9 @@ public class GameState extends BaseAppState {
                 new KeyTrigger(KeyInput.KEY_SPACE));
         inputManager.addMapping("Reset",
                 new KeyTrigger(KeyInput.KEY_R));
-        inputManager.addListener(moveControl, "Strafe Left", "Strafe Right");
-        inputManager.addListener(moveControl, "Walk Forward", "Walk Backward");
-        inputManager.addListener(moveControl, "Jump");
+        inputManager.addListener(getState(MovementAppState.class), "Strafe Left", "Strafe Right");
+        inputManager.addListener(getState(MovementAppState.class), "Walk Forward", "Walk Backward");
+        inputManager.addListener(getState(MovementAppState.class), "Jump");
         inputManager.addListener((ActionListener) (String string, boolean bln, float f) -> {
             if (!bln) {
                 reset();
@@ -175,8 +174,7 @@ public class GameState extends BaseAppState {
         Spatial runEmitter = assetManager.loadModel("Models/RunEmitter.j3o");
         playerNode.attachChild(runEmitter);
         
-        moveControl = new MovementControl(app.getCamera());
-        playerNode.addControl(moveControl);
+        getState(MovementAppState.class).setPlayer(playerNode);
     }
 
     public Vector3f getPlayerPosition() {
