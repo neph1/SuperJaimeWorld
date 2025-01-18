@@ -111,7 +111,7 @@ public class MovementAppState extends BaseAppState implements ActionListener {
                 smokeEmitter.getControl(ImpactEmitterControl.class).emitLarge(fallingTime * 2f);
             }
             fallingTime = 0f;
-            
+            jumping = false;
         }
 
         updateAnimation();
