@@ -103,7 +103,8 @@ public class SceneState extends BaseAppState {
         SceneGraphIterator it = new SceneGraphIterator(rootNode);
         it.forEach(spatial -> spatial.setShadowMode(ShadowMode.CastAndReceive));
         
-        loadEnemy(assetManager);
+        addEnemy(assetManager, new Vector3f(15f, 0f, -10f));
+        addEnemy(assetManager, new Vector3f(8.5f, -5f, -18.5f));
 
     }
 
@@ -140,14 +141,14 @@ public class SceneState extends BaseAppState {
         physicsState.getPhysicsSpace().remove(ballGeometry);
     }
 
-    private void loadEnemy(AssetManager assetManager) {
+    private void addEnemy(AssetManager assetManager, Vector3f position) {
         BetterCharacterControl enemy = new BetterCharacterControl(0.24f, 0.51f, 5.5f);
 
         physicsState.getPhysicsSpace().add(enemy);
 
         Node enemyNode = (Node) assetManager.loadModel("Models/Enemy/enemy.j3o");
         enemyNode.setLocalScale(0.5f);
-        enemyNode.setLocalTranslation(new Vector3f(15f, 5f, -10f));
+        enemyNode.setLocalTranslation(position);
 
         enemyNode.addControl(enemy);
         enemyNode.addControl(new EnemyControl());

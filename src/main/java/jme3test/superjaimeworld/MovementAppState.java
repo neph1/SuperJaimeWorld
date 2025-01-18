@@ -72,7 +72,6 @@ public class MovementAppState extends BaseAppState implements ActionListener {
     private final Camera cam;
     
     private boolean jumping = false;
-    private boolean doubleJumping = false;
 
     public MovementAppState(Camera cam) {
         this.cam = cam;
@@ -112,7 +111,6 @@ public class MovementAppState extends BaseAppState implements ActionListener {
                 smokeEmitter.getControl(ImpactEmitterControl.class).emitLarge(fallingTime * 2f);
             }
             fallingTime = 0f;
-            jumping = doubleJumping = false;
             
         }
 
@@ -145,9 +143,6 @@ public class MovementAppState extends BaseAppState implements ActionListener {
                 }
                 if (!jumping) {
                     physicsCharacter.jump();
-                } else if (!doubleJumping) {
-                    doubleJumping = true;
-                    physicsCharacter.getRigidBody().applyCentralImpulse(jumpForce);
                 }
                 animControl.setCurrentAction("JumpStart");
                 jumping = true;

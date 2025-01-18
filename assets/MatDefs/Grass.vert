@@ -54,7 +54,7 @@ void main(){
         Skinning_Compute(modelSpacePos);
     #endif
     
-    normalY = clamp(0.7 - inNormal.y * 0.75, -1.0, 0.7);
+    normalY = clamp(0.15 - inNormal.y * 0.15, -0.5, 0.0);
     
     vec4 worldView = TransformWorldView(modelSpacePos);
     
